@@ -6,9 +6,9 @@
  **/
 
 if (window.HNCOLLAPSE) {
-  window.HNCOLLAPSE = true;
   return; 
 }
+window.HNCOLLAPSE = true;
 
 function collapse(cells, startIndex, atIndent) {
   var thisCell = jQuery(cells[startIndex]);
