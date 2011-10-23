@@ -18,7 +18,7 @@ function collapse(cells, startIndex, atIndent) {
     var cell = jQuery(cells[i]);
     if (cell.data('indent') == atIndent) {
       cell.find('td:eq(2)').each(function(x, td) {
-        jQuery(td).find('p:last>font').append(" ", collapse(cells, i+1, atIndent +1));
+        jQuery(td).find('p:last>font').append(' ', collapse(cells, i+1, atIndent +1));
         children = children.add(cell);
       });
     } else if (cell.data('indent') < atIndent) {
@@ -29,9 +29,9 @@ function collapse(cells, startIndex, atIndent) {
   if (children.length > 0 && atIndent > 0) {
     children.hide();
     if (children.length < numDescendants) {
-      var expand = jQuery(' <u><a href="#">'+ numDescendants +' comments ('+children.length+')</a></u>');
+      var expand = jQuery(' <u><a href=\'#\'>'+ numDescendants +' comments ('+children.length+')</a></u>');
     } else {
-      var expand = jQuery(' <u><a href="#">'+ numDescendants +' comments</a></u>');
+      var expand = jQuery(' <u><a href=\'#\'>'+ numDescendants +' comments</a></u>');
     }
     expand.click(function(e) {
       expand.remove();
@@ -57,7 +57,7 @@ function onLoad() {
 }
 
 
-var headID = document.getElementsByTagName("head")[0];
+var headID = document.getElementsByTagName('head')[0];
 var newScript = document.createElement('script');
 newScript.type = 'text/javascript';
 newScript.onload=function() { onLoad(); };
