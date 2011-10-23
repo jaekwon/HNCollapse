@@ -5,6 +5,9 @@
  *  MIT License
  **/
 
+if (!window.location.hostname == 'news.ycombinator.com') {
+  window.location = 'http://news.ycombinator.com';
+}
 if (window.HNCOLLAPSE) {
   return; 
 }
@@ -29,7 +32,7 @@ function collapse(cells, startIndex, atIndent) {
   if (children.length > 0 && atIndent > 0) {
     children.hide();
     if (children.length < numDescendants) {
-      var expand = jQuery(' <u><a href=\'#\'>'+ numDescendants +' comments ('+children.length+')</a></u>');
+      var expand = jQuery(' <u><a href=\'#\'>'+ children.length +' comments ('+numDescendants+')</a></u>');
     } else {
       var expand = jQuery(' <u><a href=\'#\'>'+ numDescendants +' comments</a></u>');
     }
@@ -46,7 +49,7 @@ function collapse(cells, startIndex, atIndent) {
 
 
 function onLoad() {
-  var cells = jQuery('table:eq(3)>tbody>tr>td>table>tbody>tr');
+  var cells = jQuery('table:eq(0)>tbody>tr:eq(2)>td:eq(0)>table:eq(1)>tbody>tr>td>table>tbody>tr');
   cells.each(function(i, cell) {
     var width_px = jQuery(cell).find('>td>img').css('width');
     var width = Number(width_px.substr(0,width_px.length-2));
