@@ -5,7 +5,7 @@
  *  MIT License
  **/
 
-if (!window.location.hostname == 'news.ycombinator.com') {
+if (window.location.hostname != 'news.ycombinator.com') {
   window.location = 'http://news.ycombinator.com';
 }
 if (window.HNCOLLAPSE) {
