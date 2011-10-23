@@ -1,8 +1,14 @@
-// Comment Collapse Bookmarklet
-// Jae Kwon 2011
-// MIT License
-
 (function() {
+/**
+ *  Comment Collapse Bookmarklet
+ *  Jae Kwon 2011
+ *  MIT License
+ **/
+
+if (window.HNCOLLAPSE) {
+  window.HNCOLLAPSE = true;
+  return; 
+}
 
 function collapse(cells, startIndex, atIndent) {
   var thisCell = jQuery(cells[startIndex]);
@@ -11,8 +17,10 @@ function collapse(cells, startIndex, atIndent) {
   for (var i=startIndex; i<cells.length; i++) {
     var cell = jQuery(cells[i]);
     if (cell.data('indent') == atIndent) {
-      cell.find('td:eq(2)>span.comment>p:eq(1)>font').append(" ", collapse(cells, i+1, atIndent +1));
-      children = children.add(cell);
+      cell.find('td:eq(2)').each(function(x, td) {
+        jQuery(td).find('p:last>font').append(" ", collapse(cells, i+1, atIndent +1));
+        children = children.add(cell);
+      });
     } else if (cell.data('indent') < atIndent) {
       break;
     }
@@ -21,9 +29,9 @@ function collapse(cells, startIndex, atIndent) {
   if (children.length > 0 && atIndent > 0) {
     children.hide();
     if (children.length < numDescendants) {
-      var expand = jQuery('<a href="#">comments ('+children.length+'/'+numDescendants+')</a>');
+      var expand = jQuery(' <u><a href="#">'+ numDescendants +' comments ('+children.length+')</a></u>');
     } else {
-    var expand = jQuery('<a href="#">comments ('+children.length+')</a>');
+      var expand = jQuery(' <u><a href="#">'+ numDescendants +' comments</a></u>');
     }
     expand.click(function(e) {
       expand.remove();
